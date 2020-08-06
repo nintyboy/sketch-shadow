@@ -14,7 +14,8 @@ export default function () {
     var layerOfShadows
     var finalTransparency = 12
     var finalVertical = 100
-    var maxSpread = 80
+    var maxSpread = 0
+    var maxBlur = 80
 
 
     const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -32,14 +33,30 @@ export default function () {
         return
       }
       layerOfShadows = value;
+
       for (var i = 0; i < layerOfShadows; i++) {
-        log(`Shadow depth ${i}`)
-        var colorWithAlpha = "#000000" + ((finalTransparency / layerOfShadows) * (layerOfShadows - i))
-        shadows.push({
-          color: colorWithAlpha,
-          blur: (maxSpread / layerOfShadows - i) * i,
-          y: (finalVertical / layerOfShadows - i) * i,
+
+        var colorWithAlpha = Math.floor((finalTransparency / layerOfShadows) * (layerOfShadows - i))
+        var output = {
+          color: "#000000" + Math.floor((finalTransparency / layerOfShadows) * (layerOfShadows - i)),
+          blur: (maxBlur / layerOfShadows - i) * i,
           spread: -(maxSpread / layerOfShadows - i) * i,
+          y: (finalVertical / layerOfShadows - i) * i,
+        }
+        log(`-----------------`)
+        log(`Shadow Layer: ${layerOfShadows - i}`)
+        log(`Amount of Layers: ${layerOfShadows}`)
+        log(`alpha ${colorWithAlpha}`)
+        log(`color: ${output.color}`)
+        log(`blur: ${output.blur}`)
+        log(`spread: ${output.spread}`)
+        log(`y: ${output.y}`)
+        log(`-----------------`)
+        shadows.push({
+          color: output.color,
+          blur: output.blur,
+          spread: output.spread,
+          y: output.y,
         })
       }
 
@@ -47,29 +64,6 @@ export default function () {
 
 
     })
-    // log(UI.INPUT_TYPE)
-    // sketch.UI.getInputFromUser(
-    //   "How many Layers of Shadow?", {
-    //     type: sketch.UI.INPUT_TYPE.selection,
-    //     possibleValues: options
-    //   }, (err, value) => {
-    //     if (err) {
-    //       // user canceled
-    //       return
-    //     }
-    //     layerOfShadows = value;
-    //     for (var i = 0; i < layerOfShadows; i++) {
-    //       log(`Shadow depth ${i}`)
-    //       shadows.push({
-    //         color: '#c0ffee',
-    //         blur: 3,
-    //       })
-    //     }
-
-    //     shape.style.shadows = shadows
-
-    //   }
-    // )
 
 
 
