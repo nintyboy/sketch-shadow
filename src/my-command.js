@@ -57,8 +57,6 @@ export default function () {
           blur: output.blur,
           spread: output.spread,
           y: output.y,
-          // y: (finalVertical / layerOfShadows - i) * i,
-          // spread: -(maxSpread / layerOfShadows - i) * i,
         })
       }
 
@@ -66,29 +64,6 @@ export default function () {
 
 
     })
-    // log(UI.INPUT_TYPE)
-    // sketch.UI.getInputFromUser(
-    //   "How many Layers of Shadow?", {
-    //     type: sketch.UI.INPUT_TYPE.selection,
-    //     possibleValues: options
-    //   }, (err, value) => {
-    //     if (err) {
-    //       // user canceled
-    //       return
-    //     }
-    //     layerOfShadows = value;
-    //     for (var i = 0; i < layerOfShadows; i++) {
-    //       log(`Shadow depth ${i}`)
-    //       shadows.push({
-    //         color: '#c0ffee',
-    //         blur: 3,
-    //       })
-    //     }
-
-    //     shape.style.shadows = shadows
-
-    //   }
-    // )
 
 
 
