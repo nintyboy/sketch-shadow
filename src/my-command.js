@@ -13,7 +13,8 @@ export default function () {
     var shadows = []
     var layerOfShadows
     var finalTransparency = 12
-    var finalVertical
+    var finalVertical = 100
+    var maxSpread = 80
 
 
     const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -36,8 +37,9 @@ export default function () {
         var colorWithAlpha = "#000000" + ((finalTransparency / layerOfShadows) * (layerOfShadows - i))
         shadows.push({
           color: colorWithAlpha,
-          blur: layerOfShadows - i,
-
+          blur: (maxSpread / layerOfShadows - i) * i,
+          y: (finalVertical / layerOfShadows - i) * i,
+          spread: -(maxSpread / layerOfShadows - i) * i,
         })
       }
 
