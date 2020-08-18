@@ -5,13 +5,13 @@ import App from './components/App'
 
 // disable the context menu (eg. the right click menu) to have a more native feel
 document.addEventListener('contextmenu', (e) => {
-    e.preventDefault()
+    // e.preventDefault()
 })
 
 // call the plugin from the webview
-document.getElementById('button').addEventListener('click', () => {
-    window.postMessage('nativeLog', 'Called from the webview')
-})
+// document.getElementById('button').addEventListener('click', () => {
+//     window.postMessage('nativeLog', 'Called from the webview')
+// })
 
 // call the wevbiew from the plugin
 window.setRandomNumber = (randomNumber) => {
@@ -19,5 +19,6 @@ window.setRandomNumber = (randomNumber) => {
 }
 
 (() => {
+    console.log('React Started');
     ReactDOM.render( < App / > , document.getElementById('root'))
 })()

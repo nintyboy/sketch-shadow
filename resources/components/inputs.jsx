@@ -1,38 +1,28 @@
-/* some default styles to make the view more native like */
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import InputRange from 'react-input-range';
 
-html {
-    box-sizing: border-box;
-    background: transparent;
+const Form = styled.form`
+    margin: 0 auto;
+    padding: 0 20px ;
+    @media(min - width: 800px) {
+        max - width: 60 %;
+    }
+    display:flex;
+    flex-direction: column; 
+    margin-bottom: 10px; 
+`;
+const Label_container = styled.div`
+    display: flex;
+    flex-direction: row;
+    font-family: "Helvetica Neue", san-serif;
+    font-size: 0.9rem;
+    margin: 14px 0;
+    justify-content: space-between;
+`;
 
-    /* Prevent the page to be scrollable */
-    overflow: hidden;
-
-    /* Force the default cursor, even on text */
-    cursor: default;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
-    position: relative;
-
-    /* Prevent the content from being selectionable */
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-input,
-textarea {
-    -webkit-user-select: auto;
-    user-select: auto;
-}
-
-/*
-Range CSS
-*/
+const Label = styled.label`
+color: #aaaaaa;
 
 .input-range__slider {
     -webkit-appearance: none;
@@ -102,13 +92,15 @@ Range CSS
 }
 
 .input-range__label--value {
-    position: absolute;
-    top: -1.8rem;
+    /* position: absolute;
+    top: -1.8rem; */
+    display: none;
 }
 
 .input-range__label-container {
-    left: -50%;
-    position: relative;
+    /* left: -50%;
+    position: relative; */
+    display: none;
 }
 
 .input-range__label--max .input-range__label-container {
@@ -120,7 +112,7 @@ Range CSS
     border-radius: 0.3rem;
     cursor: pointer;
     display: block;
-    height: 0.3rem;
+    height: 0.2rem;
     position: relative;
     -webkit-transition: left 0.3s ease-out, width 0.3s ease-out;
     transition: left 0.3s ease-out, width 0.3s ease-out;
@@ -147,3 +139,50 @@ Range CSS
     position: relative;
     width: 100%;
 }
+
+`
+const Result = styled.div`
+background-color: rgba(239,242,247,1);
+font-weight: 600;
+color: #3F51B5;
+border-radius: 1rem;
+padding: 0em 0.8em;
+`
+
+
+function Inputs({label, min, max, initalValue,updateValue}){
+
+    const [value, setValue] = useState(initalValue);
+
+    return(
+        <div>
+            <Form>
+                <Label_container>
+    <Label>{label}</Label>
+                    <Result>
+                        <span>
+                            {value}
+                        </span>
+                    </Result>
+
+                </Label_container>
+                <InputRange
+                    maxValue={max}
+                    minValue={min}
+
+                    value={value}
+                    onChange={event => { 
+                        setValue(event)
+                       
+                        }
+                    }
+                    onChangeComplete={value =>{
+                        console.log(value)
+                        updateValue(value)
+                    } } />
+            </Form>
+        </div>
+    )
+}
+
+export default Inputs; 
